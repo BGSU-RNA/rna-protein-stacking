@@ -1,0 +1,5 @@
+# RNA Protein Stacking #
+
+This is a repo to help display RNA protein interaction data. The idea is to
+have a script `find_stacking.py` which creates an HTML file that can be opened
+to visualize the stacking interactions.
