@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+  </head>
+
+  <body>
+
+    <div class="container">
+      <div class='row'>
+        <div class='col-md-6'>
+          <h3>Stacking interactions</h3>
+          <form action=''>
+            {% for interaction in interactions %}
+            <div class='radio'>
+              <input type="radio" class='jmolInline' name="interactions" value=""
+               data-coord='{{ interaction.nt }},{{ interaction.aa }}'>
+              <label>{{ interaction.nt }} - {{ interaction.aa }}</label>
+            </div>
+            {% endfor %}
+          </form>
+        </div>
+
+        <div class='col-md-6'>
+          <div class='jsmol'>
+            <script src="http://rna.bgsu.edu/img/jar3d/jsmol/JSmol.min.js"></script>
+            <script>
+              function jmolScript(cmd) {Jmol.script(jmolApplet0, cmd)};
+              function jmolScriptWait(cmd) {Jmol.scriptWait(jmolApplet0, cmd)};
+
+              Jmol.getProfile();
+
+              var jsMolSize = 340;
+
+              var config = {
+                width: jsMolSize,
+                height: jsMolSize,
+                debug: false,
+                color: "#F0F0F0",
+                addSelectionOptions: false,
+                use: "HTML5",
+                j2sPath: "http://rna.bgsu.edu/img/jar3d/jsmol/j2s",
+                isSigned: false,
+                disableJ2SLoadMonitor: true,
+                disableInitialConsole: true,
+                allowjavascript: true,
+                readyFunction: function() {
+                  $('.jmolInline').first().jmolToggle();
+                },
+              };
+              jmolApplet0 = Jmol.getApplet("jmolApplet0", config);
+            </script>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://rna.bgsu.edu/rna3dhub/js/jquery.jmolTools.js"></script>
+    <script>
+    $(document).ready(function() {
+      // initialize jmolTools
+      $('.jmolInline').jmolTools({
+        showStereoId: 'stereo',
+        showNeighborhoodId: 'neighborhood',
+        showNumbersId: 'showNtNums',
+        showNextId: 'next',
+        showPrevId: 'prev'
+      });
+    });
+    </script>
+    </body>
+</html>
